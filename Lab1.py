@@ -4,7 +4,6 @@ import numpy as np
 count = 0 # Variable globale pour compter les occurrences
 matriceinitiale = np.array([]) # matrice "initiale" du jeu
 matricevoulue = np.array([]) # matrice voulue du jeu
-matriceresultat = np.array([]) # matrice résultat du mouvement (jeu actuel)
 
 def initialiser_application():
     """Préparation des ressources ou de la configuration."""
@@ -32,11 +31,6 @@ def initialiser_application():
     print("Matrice voulue :")
     print(matricevoulue)
 
-    # Initialisation de la matrice résultat
-    global matriceresultat
-    matriceresultat = np.copy(matriceinitiale)
-
-
 def main():
     """Fonction principale contenant le flux d'exécution."""
     initialiser_application()
@@ -44,6 +38,27 @@ def main():
     # Logique principale du programme
     print("Application en cours d'exécution.")
 
+    # Boucle d'application de l'algorithme de recherche en largeur pour résoudre le jeu
+    global count
+    while (count <= 10):
+        print ("Execution largeur #", count)
+        # TODO: Ajouter ici l'implémentation de l'algorithme pour résoudre le jeu
+        count += 1
+
+    # Boucle d'application de l'algorithme de recherche en profondeur pour résoudre le jeu
+    count = 0  # Réinitialiser le compteur
+    while (count <= 10):
+        print ("Execution profondeur #", count)
+        # TODO: Ajouter ici l'implémentation de l'algorithme pour résoudre le jeu
+        count += 1
+
+    # Boucle d'application de l'algorithme de recherche à approfondissement itératif pour résoudre le jeu
+    count = 0  # Réinitialiser le compteur
+    while (count <= 10):
+        print ("Execution approfondissement itératif #", count)
+        # TODO: Ajouter ici l'implémentation de l'algorithme pour résoudre le jeu
+        count += 1
+    
     # Retour d'un code de sortie (0 = succès)
     return 0
 
