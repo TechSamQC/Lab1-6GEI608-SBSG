@@ -2,29 +2,39 @@ import sys
 import numpy as np
 
 count = 0 # Variable globale pour compter les occurrences
-matriceinitiale = np.array([]) # matrice colonne "initiale" du jeu
+matriceinitiale = np.array([]) # matrice "initiale" du jeu
 matricevoulue = np.array([]) # matrice voulue du jeu
 matriceresultat = np.array([]) # matrice résultat du mouvement (jeu actuel)
-matriceidentite = np.array([[0]]) # matrice identité
 
 def initialiser_application():
     """Préparation des ressources ou de la configuration."""
     print("Initialisation des composants...")
-    # Lire le fichier .txt de l'exemple pour initialiser la matrice colonne "initiale"
+
+    # Lire le fichier .txt de l'exemple pour initialiser la matrice "initiale"
+    # Mode "r" (read) : lit le contenu
+    with open("input-Ex1/Ex1-1.txt", "r", encoding="utf-8") as f:
+        # Tout lire dans une seule chaîne
+        JeuInitiale = f.read()
+    print ("Contenu du fichier exemple du jeu :")
+    print(JeuInitiale)
+
+    # Initialisation de la matrice "initiale"
     global matriceinitiale
-    
+    matriceinitiale = np.array([[JeuInitiale[0], JeuInitiale[2], JeuInitiale[4]], 
+                                [JeuInitiale[6], JeuInitiale[8], JeuInitiale[10]], 
+                                [JeuInitiale[12], JeuInitiale[14], JeuInitiale[16]]])
+    print("Matrice initiale :")
+    print(matriceinitiale)
 
     # Initialisation de la matrice voulue
     global matricevoulue
-    matricevoulue = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 0]])
+    matricevoulue = np.array([["1", "2", "3"], ["4", "5", "6"], ["7", "8", "*"]])
+    print("Matrice voulue :")
+    print(matricevoulue)
 
     # Initialisation de la matrice résultat
     global matriceresultat
     matriceresultat = np.copy(matriceinitiale)
-
-    # Initialisation de la matrice identité
-    global matriceidentite
-    matriceidentite = np.eye(9)
 
 
 def main():
