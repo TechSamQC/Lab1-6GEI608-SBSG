@@ -1,0 +1,22 @@
+Nombre de deplacements : 20
+Mouvements de la case vide (*) :
+1	bas
+2	droite
+3	haut
+4	gauche
+5	gauche
+6	haut
+7	droite
+8	droite
+9	bas
+10	gauche
+11	bas
+12	gauche
+13	haut
+14	droite
+15	haut
+16	gauche
+17	bas
+18	droite
+19	droite
+20	bas
