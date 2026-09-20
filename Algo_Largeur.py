@@ -1,7 +1,7 @@
 import numpy as np
 import time
 
-def AlgoLargeur(matriceinitiale, matricevoulue, compteur):
+def AlgoLargeur(matriceinitiale, matricevoulue, compteur, Ex):
     """
     Algorithme de recherche en largeur pour résoudre le problème du jeu.
     
@@ -9,6 +9,7 @@ def AlgoLargeur(matriceinitiale, matricevoulue, compteur):
         matriceinitiale (np.ndarray): La matrice représentant l'état initial du jeu.
         matricevoulue (np.ndarray): La matrice représentant l'état souhaité du jeu.
         compteur (int): Le numéro de l'exécution (pour créer le fichier de sortie).
+        Ex (int): Le numéro de l'exemple pour créer le dossier de sortie.
     """
     # Définition des variables nécessaires pour l'algorithme
     it = 0 # Compteur pour suivre le nombre d'itérations
@@ -25,7 +26,15 @@ def AlgoLargeur(matriceinitiale, matricevoulue, compteur):
     while True:
         # Sécurité pour éviter un crash si aucune solution n'existe
         if it >= len(ListeFrontiere):
-            print("Aucune solution trouvée (tous les états ont été explorés).")
+            # Code pour enregistrer les données dans un fichier de sortie
+            # Ouverture en mode écriture ("w") avec encodage UTF-8 (pour gérer les accents)
+            with open("output_Ex1-" + str(Ex) + "/Algo_Largeur_" + str(compteur) + ".txt", "w", encoding="utf-8") as fichier:
+                # Écriture des informations dans le fichier
+                fichier.write("***AUCUNE SOLTUION TROUVÉE, TOUTS LES ÉTATS ONT ÉTÉ EXPLORÉS***\n")
+                fichier.write("Execution " + str(compteur) + ". \t Taille de la frontière : " + str(len(ListeFrontiere)) + ".\n")
+                fichier.write("Nombre d'états explorés : " + str(it) + ".\n")
+                fichier.write("Temps d'exécution : " + str(round(time.time() - starttime, 4)) + " secondes.\n")
+            print("Aucune solution trouvée (tous les états ont été explorés).") # Message de confirmation dans la console
             break
 
         xinit = np.where(ListeFrontiere[it] == "*")[0][0]  # Coordonnée x de la case vide dans l'état courant de cet itération
@@ -34,7 +43,7 @@ def AlgoLargeur(matriceinitiale, matricevoulue, compteur):
         if np.array_equal(ListeFrontiere[it], matricevoulue):  # Vérifie si l'état courant correspond à l'état souhaité
             # Code pour enregistrer les données dans un fichier de sortie
             # Ouverture en mode écriture ("w") avec encodage UTF-8 (pour gérer les accents)
-            with open("output/Algo_Largeur_" + str(compteur) + ".txt", "w", encoding="utf-8") as fichier:
+            with open("output_Ex1-" + str(Ex) + "/Algo_Largeur_" + str(compteur) + ".txt", "w", encoding="utf-8") as fichier:
                 # Écriture des informations dans le fichier
                 fichier.write("Execution " + str(compteur) + ". \t Taille de la frontière : " + str(len(ListeFrontiere)) + ".\n")
                 fichier.write("Nombre d'états explorés : " + str(it) + ".\n")
