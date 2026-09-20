@@ -34,7 +34,7 @@ def AlgoLargeur(matriceinitiale, matricevoulue, compteur):
         if np.array_equal(ListeFrontiere[it], matricevoulue):  # Vérifie si l'état courant correspond à l'état souhaité
             # Code pour enregistrer les données dans un fichier de sortie
             # Ouverture en mode écriture ("w") avec encodage UTF-8 (pour gérer les accents)
-            with open("Algo_Largeur_" + str(compteur) + ".txt", "w", encoding="utf-8") as fichier:
+            with open("output/Algo_Largeur_" + str(compteur) + ".txt", "w", encoding="utf-8") as fichier:
                 # Écriture des informations dans le fichier
                 fichier.write("Execution " + str(compteur) + ". \t Taille de la frontière : " + str(len(ListeFrontiere)) + ".\n")
                 fichier.write("Nombre d'états explorés : " + str(it) + ".\n")
