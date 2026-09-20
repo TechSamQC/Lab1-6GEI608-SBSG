@@ -32,10 +32,14 @@ def AlgoLargeur(matriceinitiale, matricevoulue, compteur):
         yinit = np.where(ListeFrontiere[it] == "*")[1][0]  # Coordonnée y de la case vide dans l'état courant de cet itération
 
         if np.array_equal(ListeFrontiere[it], matricevoulue):  # Vérifie si l'état courant correspond à l'état souhaité
-            # TODO : Ajouter ici le code pour enregistrer les données dans un fichier de sortie
-            print("Execution ", compteur, ": Solution trouvée !")
-            print("Nombre d'itérations :", it)
-            print("Temps d'exécution :", round(time.time() - starttime, 4), "secondes")
+            # Code pour enregistrer les données dans un fichier de sortie
+            # Ouverture en mode écriture ("w") avec encodage UTF-8 (pour gérer les accents)
+            with open("Algo_Largeur_" + str(compteur) + ".txt", "w", encoding="utf-8") as fichier:
+                # Écriture des informations dans le fichier
+                fichier.write("Execution " + str(compteur) + ". \t Taille de la frontière : " + str(len(ListeFrontiere)) + ".\n")
+                fichier.write("Nombre d'états explorés : " + str(it) + ".\n")
+                fichier.write("Temps d'exécution : " + str(round(time.time() - starttime, 4)) + " secondes.\n")
+            print("Execution ", compteur, ": Solution trouvée !") # Message de confirmation dans la console
             break  # Sortir de la boucle si la solution est trouvée
 
         # Option 1 = gauche
