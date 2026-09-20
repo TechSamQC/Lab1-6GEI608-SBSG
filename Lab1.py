@@ -5,7 +5,7 @@ from Algo_Largeur import AlgoLargeur
 from Algo_Profondeur import AlgoProfondeur
 from Algo_Approfondissement import AlgoApprofondissement
 
-count = 0 # Variable globale pour compter les occurrences
+count = 1 # Variable globale pour compter les occurrences
 matriceinitiale = np.array([]) # matrice "initiale" du jeu
 matricevoulue = np.array([]) # matrice voulue du jeu
 
@@ -51,14 +51,14 @@ def main():
         count += 1
 
     # Boucle d'application de l'algorithme de recherche en profondeur pour résoudre le jeu
-    count = 0  # Réinitialiser le compteur
+    count = 1  # Réinitialiser le compteur
     while (count <= 10):
         print ("Execution profondeur #", count)
         # TODO: Ajouter ici l'implémentation de l'algorithme pour résoudre le jeu
         count += 1
 
     # Boucle d'application de l'algorithme de recherche à approfondissement itératif pour résoudre le jeu
-    count = 0  # Réinitialiser le compteur
+    count = 1  # Réinitialiser le compteur
     while (count <= 10):
         print ("Execution approfondissement itératif #", count)
         # TODO: Ajouter ici l'implémentation de l'algorithme pour résoudre le jeu
