@@ -4,6 +4,7 @@ from pathlib import Path  # Importe Path pour construire les chemins des fichier
 
 from Algo_Largeur import AlgoLargeur  # Importe la fonction AlgoLargeur définie dans le fichier Algo_Largeur.py.
 from Algo_Profondeur import AlgoProfondeur  # Importe la fonction AlgoProfondeur définie dans le fichier Algo_Profondeur.py.
+from Algo_Approfondissement import AlgoApprofondissement  # Importe la recherche à approfondissement itératif définie dans Algo_Approfondissement.py.
 
 count = 0  # Initialise le compteur global des essais ; il sera remis à 1 pour chaque fichier d'entrée.
 matriceinitiale = np.array([])  # Crée la variable qui contiendra la grille de départ après la lecture du fichier.
@@ -52,10 +53,10 @@ def main():  # Définit la fonction principale qui choisit les entrées et lance
     """Fonction principale contenant le flux d'exécution."""
     arguments = sys.argv[1:]  # Récupère les arguments du terminal en laissant de côté le nom du script.
     algorithme = "largeur"  # Garde la recherche en largeur par défaut pour conserver les anciennes commandes.
-    if arguments and arguments[0] in ("largeur", "profondeur"):  # Vérifie si le premier argument choisit explicitement l'un des deux algorithmes.
+    if arguments and arguments[0] in ("largeur", "profondeur", "approfondissement"):  # Vérifie si le premier argument choisit explicitement l'un des trois algorithmes.
         algorithme = arguments.pop(0)  # Retient ce choix et retire ce premier argument pour traiter ensuite le fichier d'entrée.
     if len(arguments) > 1:  # Refuse plus d'un argument restant après le choix facultatif de l'algorithme.
-        print("Utilisation : python Lab1.py [largeur | profondeur] [chemin_du_fichier | --tous]")  # Explique comment choisir la recherche et les entrées.
+        print("Utilisation : python Lab1.py [largeur | profondeur | approfondissement] [chemin_du_fichier | --tous]")  # Explique comment choisir la recherche et les entrées.
         return 1  # Termine main avec le code 1 pour signaler une mauvaise utilisation.
     if arguments and arguments[0] == "--tous":  # Vérifie si l'utilisateur demande de traiter les quatre fichiers d'entrée.
         fichiers = [DOSSIER / "input-Ex1" / f"Ex1-{i}.txt" for i in range(1, 5)]  # Construit les chemins de Ex1-1.txt à Ex1-4.txt ; range(1, 5) produit 1, 2, 3 et 4.
@@ -63,7 +64,12 @@ def main():  # Définit la fonction principale qui choisit les entrées et lance
         fichiers = [Path(arguments[0])]  # Construit le chemin de l'unique fichier à traiter.
     else:  # Traite le lancement sans argument supplémentaire.
         fichiers = [DOSSIER / "input-Ex1" / "Ex1-1.txt"]  # Sélectionne uniquement Ex1-1.txt pour le lancement par défaut.
-    fonction_recherche = AlgoLargeur if algorithme == "largeur" else AlgoProfondeur  # Sélectionne la fonction correspondant à la recherche demandée.
+    if algorithme == "largeur":  # Vérifie si la recherche en largeur a été choisie.
+        fonction_recherche = AlgoLargeur  # Sélectionne la fonction de recherche en largeur.
+    elif algorithme == "profondeur":  # Vérifie si la recherche en profondeur a été choisie.
+        fonction_recherche = AlgoProfondeur  # Sélectionne la fonction de recherche en profondeur.
+    else:  # Traite le troisième choix accepté, approfondissement.
+        fonction_recherche = AlgoApprofondissement  # Sélectionne la recherche à approfondissement itératif.
 
     # Logique principale du programme
     print("Application en cours d'exécution.")  # Annonce le lancement de l'application dans le terminal.
