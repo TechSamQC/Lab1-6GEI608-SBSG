@@ -1,0 +1,3 @@
+Execution 8. 	 Taille de la frontière : 139734.
+Nombre d'états explorés : 96879.
+Temps d'exécution : 1.4695 secondes.

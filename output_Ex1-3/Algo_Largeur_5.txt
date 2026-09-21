@@ -1,4 +1,4 @@
 ***AUCUNE SOLTUION TROUVÉE, TOUTS LES ÉTATS ONT ÉTÉ EXPLORÉS***
 Execution 5. 	 Taille de la frontière : 181440.
 Nombre d'états explorés : 181440.
-Temps d'exécution : 3.5988 secondes.
+Temps d'exécution : 2.4863 secondes.
