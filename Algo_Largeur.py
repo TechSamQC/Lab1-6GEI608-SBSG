@@ -17,10 +17,7 @@ def AlgoLargeur(matriceinitiale, matricevoulue, compteur, Ex):
     matriceetat = np.copy(matriceinitiale)  # Copie de la matrice initiale pour manipulation
     ListeFrontiere = []  # Liste des états à explorer
     ListeFrontiere.append(matriceetat)  # Ajouter l'état initial à la liste des états à explorer
-
-    # Liste pour garder l'index du parent de chaque état dans ListeFrontiere
-    # L'état initial (index 0) n'a pas de parent (None)
-    parents = [None]
+    parents = [None] # Liste pour garder l'index du parent de chaque état dans ListeFrontiere. L'état initial (index 0) n'a pas de parent (None)
 
     # Création d'un set() avec la matrice initiale sous forme d'octets afin de vérifier si un état a déjà été exploré de facon performante
     vus = set()
@@ -34,7 +31,7 @@ def AlgoLargeur(matriceinitiale, matricevoulue, compteur, Ex):
             if it >= len(ListeFrontiere):
                 # Code pour enregistrer les données dans le fichier de sortie
                 # Écriture des informations dans le fichier
-                output.write("***AUCUNE SOLTUION TROUVÉE, TOUTS LES ÉTATS ONT ÉTÉ EXPLORÉS***\n")
+                output.write("***AUCUNE SOLUTION TROUVÉE, TOUTS LES ÉTATS ONT ÉTÉ EXPLORÉS***\n")
                 output.write("Execution " + str(compteur) + ". \t Taille de la frontière finale : " + str(len(ListeFrontiere)) + ".\n")
                 output.write("Nombre d'états explorés : " + str(it) + ".\n")
                 output.write("Temps d'exécution : " + str(round(time.time() - starttime, 4)) + " secondes.\n")
