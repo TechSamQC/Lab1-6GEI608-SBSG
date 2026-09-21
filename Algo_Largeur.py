@@ -60,7 +60,7 @@ def AlgoLargeur(matriceinitiale, matricevoulue, compteur, Ex):
             cle = matriceetat.tobytes()
             if cle not in vus: # Si l'état n'a pas encore été exploré
                 vus.add(cle)  # On l'ajoute au set
-                ListeFrontiere.append(matriceetat)  # Et à ta liste d'origine
+                ListeFrontiere.append(matriceetat)  # Et à la liste d'origine
 
         # Option 2 = droite
         if yinit < 2:  # Vérifie si on peut se déplacer vers la droite
@@ -71,7 +71,7 @@ def AlgoLargeur(matriceinitiale, matricevoulue, compteur, Ex):
             cle = matriceetat.tobytes()
             if cle not in vus: # Si l'état n'a pas encore été exploré
                 vus.add(cle)  # On l'ajoute au set
-                ListeFrontiere.append(matriceetat)  # Et à ta liste d'origine
+                ListeFrontiere.append(matriceetat)  # Et à la liste d'origine
 
         # Option 3 = haut
         if xinit > 0:  # Vérifie si on peut se déplacer vers le haut
@@ -82,7 +82,7 @@ def AlgoLargeur(matriceinitiale, matricevoulue, compteur, Ex):
             cle = matriceetat.tobytes()
             if cle not in vus: # Si l'état n'a pas encore été exploré
                 vus.add(cle)  # On l'ajoute au set
-                ListeFrontiere.append(matriceetat)  # Et à ta liste d'origine
+                ListeFrontiere.append(matriceetat)  # Et à la liste d'origine
 
         # Option 4 = bas
         if xinit < 2:  # Vérifie si on peut se déplacer vers le bas
@@ -93,6 +93,6 @@ def AlgoLargeur(matriceinitiale, matricevoulue, compteur, Ex):
             cle = matriceetat.tobytes()
             if cle not in vus: # Si l'état n'a pas encore été exploré
                 vus.add(cle)  # On l'ajoute au set
-                ListeFrontiere.append(matriceetat)  # Et à ta liste d'origine
+                ListeFrontiere.append(matriceetat)  # Et à la liste d'origine
 
         it += 1  # Incrémenter le compteur d'itérations
