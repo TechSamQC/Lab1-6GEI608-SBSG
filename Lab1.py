@@ -5,7 +5,8 @@ from Algo_Largeur import AlgoLargeur
 from Algo_Profondeur import AlgoProfondeur
 from Algo_Approfondissement import AlgoApprofondissement
 
-count = 0 # Variable globale pour compter les occurrences
+count = 1 # Variable globale pour compter les occurrences
+Ex = 1 # Variable globale pour le numéro d'exemple
 matriceinitiale = np.array([]) # matrice "initiale" du jeu
 matricevoulue = np.array([]) # matrice voulue du jeu
 
@@ -15,7 +16,7 @@ def initialiser_application():
 
     # Lire le fichier .txt de l'exemple pour initialiser la matrice "initiale"
     # Mode "r" (read) : lit le contenu
-    with open("input-Ex1/Ex1-1.txt", "r", encoding="utf-8") as f:
+    with open("input-Ex1/Ex1-" + str(Ex) + ".txt", "r", encoding="utf-8") as f:
         # Tout lire dans une seule chaîne
         JeuInitiale = f.read()
     print ("Contenu du fichier exemple du jeu :")
@@ -47,18 +48,19 @@ def main():
     while (count <= 10):
         print ("Execution largeur #", count)
         # Appel de l'algorithme de recherche en largeur
-        AlgoLargeur(matriceinitiale, matricevoulue, count)
+        AlgoLargeur(matriceinitiale, matricevoulue, count, Ex)
         count += 1
 
     # Boucle d'application de l'algorithme de recherche en profondeur pour résoudre le jeu
-    count = 0  # Réinitialiser le compteur
+    count = 1  # Réinitialiser le compteur
     while (count <= 10):
         print ("Execution profondeur #", count)
-        # TODO: Ajouter ici l'implémentation de l'algorithme pour résoudre le jeu
+        # Appel de l'algorithme de recherche en profondeur
+        AlgoProfondeur(matriceinitiale, matricevoulue, count, Ex)
         count += 1
 
     # Boucle d'application de l'algorithme de recherche à approfondissement itératif pour résoudre le jeu
-    count = 0  # Réinitialiser le compteur
+    count = 1  # Réinitialiser le compteur
     while (count <= 10):
         print ("Execution approfondissement itératif #", count)
         # TODO: Ajouter ici l'implémentation de l'algorithme pour résoudre le jeu
