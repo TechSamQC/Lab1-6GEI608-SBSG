@@ -19,12 +19,16 @@ def AlgoProfondeur(matriceinitiale, matricevoulue, compteur, Ex):
     ListeFrontiere.append(matriceetat)  # Ajouter l'état initial à la liste des états à explorer
     Pile = [0]  # Pile pour la recherche en profondeur
 
+    # Liste pour garder l'index du parent de chaque état dans ListeFrontiere
+    # L'état initial (index 0) n'a pas de parent (None)
+    parents = [None]
+
     # Création d'un set() avec la matrice initiale sous forme d'octets afin de vérifier si un état a déjà été exploré de facon performante
     vus = set()
     vus.add(matriceinitiale.tobytes())
 
     # Ouverture en mode écriture ("w") du fichier de sortie des informations avec encodage UTF-8 (pour gérer les accents)
-    with open("output_Ex1-" + str(Ex) + "/Algo_Profondeur_" + str(compteur) + ".txt", "w", encoding="utf-8") as output:
+    with open("output_Ex1-" + str(Ex) + "/Algo_Profondeur_" + str(compteur) + "_stats.txt", "w", encoding="utf-8") as output:
         # Implémentation de l'algorithme de recherche en profondeur
         while True:
             # Sécurité pour éviter un crash si aucune solution n'existe
@@ -49,6 +53,27 @@ def AlgoProfondeur(matriceinitiale, matricevoulue, compteur, Ex):
                 output.write("Execution " + str(compteur) + ". \t Taille de la frontière finale : " + str(len(ListeFrontiere)) + ".\n")
                 output.write("Nombre d'états explorés : " + str(it) + ".\n")
                 output.write("Temps d'exécution : " + str(round(time.time() - starttime, 4)) + " secondes.\n")
+
+                # Code pour enregistrer la solution dans le fichier de sortie
+                with open("output_Ex1-" + str(Ex) + "/Algo_Profondeur_" + str(compteur) + "_chemin_solution.txt", "w", encoding="utf-8") as solution:
+                    # Parcourir les parents pour reconstruire le chemin
+                    chemin = [] # Liste pour stocker le chemin de la solution
+                    index_courant = Index # Index de l'état courant (solution) dans ListeFrontiere
+                    while index_courant is not None: # Tant que l'on n'a pas atteint l'état initial (parent None)
+                        chemin.append(ListeFrontiere[index_courant]) # Ajouter la matrice de l'état courant à la liste du chemin
+                        index_courant = parents[index_courant]  # On remonte vers le parent suivant
+                    chemin.reverse()  # Inverser pour avoir le chemin de l'état initial à la solution
+
+                    # Écriture de la taille du chemin de la solution dans le fichier
+                    solution.write("Taille du chemin de la solution : " + str(len(chemin)) + ".\n")
+                    
+                    # Écriture du chemin de la solution dans le fichier
+                    solution.write("Chemin de la solution (de l'état initial à l'état souhaité) :\n")
+                    for etat in chemin: # Parcourir chaque état dans le chemin
+                        # Écrire l'état dans le fichier de solution en transformant l'array en texte, en supprimant les caractères inutiles 
+                        # et en ajoutant deux sauts de ligne entre chaque état pour une meilleure lisibilité 
+                        solution.write(np.array2string(etat).replace("[", "").replace("]", "").replace(" ", "").replace("''", "\t").replace("'", "") + "\n\n") # Écrire l'état dans le fichier de solution
+
                 print("Execution ", compteur, ": Solution trouvée !") # Message de confirmation dans la console
                 break  # Sortir de la boucle si la solution est trouvée
 
@@ -66,6 +91,7 @@ def AlgoProfondeur(matriceinitiale, matricevoulue, compteur, Ex):
                     vus.add(cle)  # On l'ajoute au set
                     ListeFrontiere.append(matriceetat)  # Et à la liste d'origine
                     Pile.append(len(ListeFrontiere) - 1)  # Ajouter l'index de l'état sur le dessus de la pile pour exploration ultérieure
+                    parents.append(Index)  # L'état courant (index) est le parent de ce nouvel état
 
             # Option 2 = droite
             if yinit < 2:  # Vérifie si on peut se déplacer vers la droite
@@ -78,6 +104,7 @@ def AlgoProfondeur(matriceinitiale, matricevoulue, compteur, Ex):
                     vus.add(cle)  # On l'ajoute au set
                     ListeFrontiere.append(matriceetat)  # Et à la liste d'origine
                     Pile.append(len(ListeFrontiere) - 1)  # Ajouter l'index de l'état sur le dessus de la pile pour exploration ultérieure
+                    parents.append(Index)  # L'état courant (index) est le parent de ce nouvel état
 
             # Option 3 = haut
             if xinit > 0:  # Vérifie si on peut se déplacer vers le haut
@@ -90,6 +117,7 @@ def AlgoProfondeur(matriceinitiale, matricevoulue, compteur, Ex):
                     vus.add(cle)  # On l'ajoute au set
                     ListeFrontiere.append(matriceetat)  # Et à la liste d'origine
                     Pile.append(len(ListeFrontiere) - 1)  # Ajouter l'index de l'état sur le dessus de la pile pour exploration ultérieure
+                    parents.append(Index)  # L'état courant (index) est le parent de ce nouvel état
 
             # Option 4 = bas
             if xinit < 2:  # Vérifie si on peut se déplacer vers le bas
@@ -102,5 +130,6 @@ def AlgoProfondeur(matriceinitiale, matricevoulue, compteur, Ex):
                     vus.add(cle)  # On l'ajoute au set
                     ListeFrontiere.append(matriceetat)  # Et à la liste d'origine
                     Pile.append(len(ListeFrontiere) - 1)  # Ajouter l'index de l'état sur le dessus de la pile pour exploration ultérieure
+                    parents.append(Index)  # L'état courant (index) est le parent de ce nouvel état
 
             it += 1  # Incrémenter le compteur d'itérations
