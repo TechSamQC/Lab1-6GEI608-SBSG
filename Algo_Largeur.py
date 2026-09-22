@@ -61,6 +61,7 @@ def AlgoLargeur(matriceinitiale, matricevoulue, compteur, dossier_sortie=None): 
                 ListeFrontiere.append(matriceetat)  # Ajoute le nouvel état en fin de liste pour l'examiner après les états déjà en attente.
                 ListeParents.append(it)  # Mémorise l'indice de l'état courant comme parent du nouvel état.
                 ListeActions.append("gauche")  # Mémorise que le vide s'est déplacé vers la gauche pour produire cet état.
+                
 
         # Option 2 = droite
         if yinit < 2:  # Autorise le déplacement à droite si le vide n'est pas dans la dernière colonne, d'indice 2.

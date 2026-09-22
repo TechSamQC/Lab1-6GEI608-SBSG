@@ -100,6 +100,7 @@ def AlgoProfondeur(matriceinitiale, matricevoulue, compteur, dossier_sortie=None
             chemin.append(actions[cle])  # Récupère le mouvement ayant permis d'arriver à cet état.
             cle = parents[cle]  # Remonte à l'état précédent du chemin.
         chemin.reverse()  # Remet les mouvements dans l'ordre de l'état initial vers l'objectif.
+    
 
     temps_execution = time.perf_counter() - starttime  # Mesure la recherche et la reconstruction du chemin, comme dans AlgoLargeur.
 
