@@ -12,23 +12,7 @@ def AlgoApprofondissement(matriceinitiale, matricevoulue, compteur, dossier_sort
         compteur (int): Le numéro de l'exécution, utilisé pour nommer les fichiers.
         dossier_sortie : Le dossier où écrire les mesures et le chemin.
 
-    La recherche repart du début avec les limites 0, 1, 2, etc.
-    Chaque passage utilise une pile et ajoute les voisins dans l'ordre
-    gauche, droite, haut, bas, comme dans AlgoProfondeur.
-    Pendant un passage, un état peut être repris si un chemin plus court
-    permet de l'atteindre : un simple ensemble vus ne suffirait pas ici.
-
-    Après deux passages complets successifs découvrant le même nombre
-    d'états distincts, tous les états accessibles sont couverts : on peut
-    conclure à l'absence de solution sans choisir une limite arbitraire.
-
-    Les mesures cumulent les passages : une itération correspond à un retrait
-    de la pile, même si ce retrait est écarté car un chemin plus court est connu.
-    Le compteur inclut donc les examens répétés, pas seulement les états uniques.
-    La taille de la frontière est relevée juste avant chaque retrait.
-    Le temps comprend les passages et la reconstruction, mais pas les écritures.
-
-    Retourne un chemin de longueur minimale, ou None si aucune solution n'existe.
+   
     """
     starttime = time.perf_counter()  # Démarre le chronomètre avant l'initialisation de la recherche.
     limite = 0  # Commence par vérifier uniquement l'état initial, sans autoriser de déplacement.
