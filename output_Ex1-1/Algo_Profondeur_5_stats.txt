@@ -2774,4 +2774,4 @@ Itération 2772. 	 Taille de la frontière : 4928.
 Itération 2773. 	 Taille de la frontière : 4931.
 Execution 5. 	 Taille de la frontière finale : 4933.
 Nombre d'états explorés : 2774.
-Temps d'exécution : 0.0289 secondes.
+Temps d'exécution : 0.104 secondes.

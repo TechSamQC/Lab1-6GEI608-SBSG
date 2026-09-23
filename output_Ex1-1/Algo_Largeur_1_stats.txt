@@ -61756,4 +61756,4 @@ Itération 61754. 	 Taille de la frontière : 80320.
 Itération 61755. 	 Taille de la frontière : 80321.
 Execution 1. 	 Taille de la frontière finale : 80321.
 Nombre d'états explorés : 61756.
-Temps d'exécution : 0.6858 secondes.
+Temps d'exécution : 0.9409 secondes.

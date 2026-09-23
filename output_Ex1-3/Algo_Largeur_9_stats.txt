@@ -181438,7 +181438,7 @@ Itération 181436. 	 Taille de la frontière : 181440.
 Itération 181437. 	 Taille de la frontière : 181440.
 Itération 181438. 	 Taille de la frontière : 181440.
 Itération 181439. 	 Taille de la frontière : 181440.
-***AUCUNE SOLTUION TROUVÉE, TOUTS LES ÉTATS ONT ÉTÉ EXPLORÉS***
+***AUCUNE SOLUTION TROUVÉE, TOUTS LES ÉTATS ONT ÉTÉ EXPLORÉS***
 Execution 9. 	 Taille de la frontière finale : 181440.
 Nombre d'états explorés : 181440.
-Temps d'exécution : 1.6869 secondes.
+Temps d'exécution : 2.9789 secondes.

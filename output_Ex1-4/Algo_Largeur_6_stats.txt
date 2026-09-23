@@ -178223,4 +178223,4 @@ Itération 178221. 	 Taille de la frontière : 180898.
 Itération 178222. 	 Taille de la frontière : 180898.
 Execution 6. 	 Taille de la frontière finale : 180899.
 Nombre d'états explorés : 178223.
-Temps d'exécution : 1.8086 secondes.
+Temps d'exécution : 9.8112 secondes.

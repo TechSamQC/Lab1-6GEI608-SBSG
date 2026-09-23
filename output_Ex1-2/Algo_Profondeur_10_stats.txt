@@ -96879,4 +96879,4 @@ Itération 96877. 	 Taille de la frontière : 139729.
 Itération 96878. 	 Taille de la frontière : 139732.
 Execution 10. 	 Taille de la frontière finale : 139734.
 Nombre d'états explorés : 96879.
-Temps d'exécution : 1.0084 secondes.
+Temps d'exécution : 1.7265 secondes.

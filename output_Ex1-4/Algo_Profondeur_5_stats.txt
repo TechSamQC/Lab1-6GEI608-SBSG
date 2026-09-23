@@ -106783,4 +106783,4 @@ Itération 106781. 	 Taille de la frontière : 149173.
 Itération 106782. 	 Taille de la frontière : 149173.
 Execution 5. 	 Taille de la frontière finale : 149174.
 Nombre d'états explorés : 106783.
-Temps d'exécution : 1.2401 secondes.
+Temps d'exécution : 3.2586 secondes.

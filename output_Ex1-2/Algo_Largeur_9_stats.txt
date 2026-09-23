@@ -12716,4 +12716,4 @@ Itération 12714. 	 Taille de la frontière : 20057.
 Itération 12715. 	 Taille de la frontière : 20058.
 Execution 9. 	 Taille de la frontière finale : 20059.
 Nombre d'états explorés : 12716.
-Temps d'exécution : 0.1314 secondes.
+Temps d'exécution : 0.2056 secondes.
