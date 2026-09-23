@@ -22,13 +22,11 @@ def AlgoApprofondissementIteratif(matriceinitiale, matricevoulue, compteur, Ex):
 
     # Pour l'approfondissement itératif, nous avons besoin d'utiliser une profondeur itérative pour limiter la recherche.
     limit = 0  # Limite de profondeur initiale
-    couper = False  # 
-    profondeur_max = 31  # Profondeur maximale pour l'approfondissement itératif, si on a pas trouvé de solution en 31 déplacement, il n'y a pas de solution.
+    profondeur_max = 40  # Profondeur maximale pour notre algorithme d'approfondissement itératif (cutoff)
 
-    # Modification du set() en dictionnaire avec la matrice initiale et la profondeur minimale de l'état 
-    # afin de vérifier si un état a déjà été exploré et si sa profondeur actuelle est inférieure à la profondeur 
-    # minimale précédemment enregistrée, de facon performante
-    vus = {matriceinitiale.tobytes(): 0} # Format {clé: profondeur_minimale}
+    # Création d'un set() avec la matrice initiale sous forme d'octets afin de vérifier si un état a déjà été exploré de facon performante
+    vus = set()
+    vus.add(matriceinitiale.tobytes())
 
     # Ouverture en mode écriture ("w") du fichier de sortie des informations avec encodage UTF-8 (pour gérer les accents)
     with open("output_Ex1-" + str(Ex) + "/Algo_Approfondissement_" + str(compteur) + "_stats.txt", "w", encoding="utf-8") as output:
@@ -37,11 +35,11 @@ def AlgoApprofondissementIteratif(matriceinitiale, matricevoulue, compteur, Ex):
             if len(Pile) == 0:  # Si la pile est vide, cela signifie que nous avons exploré tous les états possibles à la profondeur actuelle
                 limit += 1 # Augmenter la limite de profondeur pour l'approfondissement itératif
 
-                # Vérifier si la limite de profondeur a été dépassée après l'augmentation
-                if limit > profondeur_max:
+                # Si la limite de profondeur est dépassée (cutoff), il n'y a plus de solutions à explorer
+                if limit > profondeur_max: 
                     # Code pour enregistrer les données dans le fichier de sortie
                     # Écriture des informations dans le fichier
-                    output.write("***AUCUNE SOLUTION TROUVÉE***\n")
+                    output.write("***AUCUNE SOLUTION TROUVÉE DANS LA LIMITE DE PROFONDEUR DE " + str(profondeur_max) + "***\n")
                     output.write("Execution " + str(compteur) + ". \t Taille de la frontière finale : " + str(len(ListeFrontiere)) + ".\n")
                     output.write("Nombre d'états explorés : " + str(it) + ".\n")
                     output.write("Temps d'exécution : " + str(round(time.time() - starttime, 4)) + " secondes.\n")
@@ -51,7 +49,9 @@ def AlgoApprofondissementIteratif(matriceinitiale, matricevoulue, compteur, Ex):
                 ListeFrontiere = [matriceinitiale.copy()]  # Réinitialiser la liste des états à explorer avec l'état initial
                 Pile = [(0, 0)]  # Réinitialiser la pile avec l'état initial et la profondeur 0
                 parents = [None] # L'état initial (index 0) n'a pas de parent (None)
-                vus = {matriceinitiale.tobytes(): 0}  # Réinitialiser le dictionnaire des états vus avec l'état initial à profondeur 0
+                couper = False  # Réinitialiser le flag de coupe pour la nouvelle limite de profondeur
+                vus = set()  # Réinitialiser le set des états déjà explorés
+                vus.add(matriceinitiale.tobytes()) # Ajouter l'état initial au set des états déjà explorés
 
             Index, profondeur = Pile.pop()  # Retirer et récupérer l'index et la profondeur de l'état sur le dessus de la pile
 
@@ -100,12 +100,12 @@ def AlgoApprofondissementIteratif(matriceinitiale, matricevoulue, compteur, Ex):
 
                     # Transformation de la matrice en 'bytes' pour tester dans le set() efficacement si l'état a déjà été exploré
                     cle = matriceetat.tobytes()
-                    if cle not in vus or (profondeur + 1) < vus[cle]: # Si l'état n'a pas encore été exploré ou si la profondeur actuelle est inférieure à la profondeur minimale précédemment enregistrée
-                        vus[cle] = profondeur + 1  # On l'ajoute au dictionnaire avec la profondeur actuelle
+                    if cle not in vus: # Si l'état n'a pas encore été exploré
+                        vus.add(cle)  # On l'ajoute au set
                         ListeFrontiere.append(matriceetat)  # Et à la liste d'origine
                         Pile.append((len(ListeFrontiere) - 1, profondeur + 1))  # Ajouter l'index de l'état avec sa profondeur sur le dessus de la pile pour exploration ultérieure
                         parents.append(Index)  # L'état courant (index) est le parent de ce nouvel état
-
+                    
                 # Option 2 = droite
                 if yinit < 2:  # Vérifie si on peut se déplacer vers la droite
                     matriceetat = np.copy(ListeFrontiere[Index])  # Copie de l'état sur le dessus de la pile
@@ -113,8 +113,8 @@ def AlgoApprofondissementIteratif(matriceinitiale, matricevoulue, compteur, Ex):
 
                     # Transformation de la matrice en 'bytes' pour tester dans le set() efficacement si l'état a déjà été exploré
                     cle = matriceetat.tobytes()
-                    if cle not in vus or (profondeur + 1) < vus[cle]: # Si l'état n'a pas encore été exploré ou si la profondeur actuelle est inférieure à la profondeur minimale précédemment enregistrée
-                        vus[cle] = profondeur + 1  # On l'ajoute au dictionnaire avec la profondeur actuelle
+                    if cle not in vus: # Si l'état n'a pas encore été exploré
+                        vus.add(cle)  # On l'ajoute au set
                         ListeFrontiere.append(matriceetat)  # Et à la liste d'origine
                         Pile.append((len(ListeFrontiere) - 1, profondeur + 1))  # Ajouter l'index de l'état avec sa profondeur sur le dessus de la pile pour exploration ultérieure
                         parents.append(Index)  # L'état courant (index) est le parent de ce nouvel état
@@ -126,8 +126,8 @@ def AlgoApprofondissementIteratif(matriceinitiale, matricevoulue, compteur, Ex):
 
                     # Transformation de la matrice en 'bytes' pour tester dans le set() efficacement si l'état a déjà été exploré
                     cle = matriceetat.tobytes()
-                    if cle not in vus or (profondeur + 1) < vus[cle]: # Si l'état n'a pas encore été exploré ou si la profondeur actuelle est inférieure à la profondeur minimale précédemment enregistrée
-                        vus[cle] = profondeur + 1  # On l'ajoute au dictionnaire avec la profondeur actuelle
+                    if cle not in vus: # Si l'état n'a pas encore été exploré
+                        vus.add(cle)  # On l'ajoute au set
                         ListeFrontiere.append(matriceetat)  # Et à la liste d'origine
                         Pile.append((len(ListeFrontiere) - 1, profondeur + 1))  # Ajouter l'index de l'état avec sa profondeur sur le dessus de la pile pour exploration ultérieure
                         parents.append(Index)  # L'état courant (index) est le parent de ce nouvel état
@@ -139,8 +139,8 @@ def AlgoApprofondissementIteratif(matriceinitiale, matricevoulue, compteur, Ex):
 
                     # Transformation de la matrice en 'bytes' pour tester dans le set() efficacement si l'état a déjà été exploré
                     cle = matriceetat.tobytes()
-                    if cle not in vus or (profondeur + 1) < vus[cle]: # Si l'état n'a pas encore été exploré ou si la profondeur actuelle est inférieure à la profondeur minimale précédemment enregistrée
-                        vus[cle] = profondeur + 1  # On l'ajoute au dictionnaire avec la profondeur actuelle
+                    if cle not in vus: # Si l'état n'a pas encore été exploré
+                        vus.add(cle)  # On l'ajoute au set
                         ListeFrontiere.append(matriceetat)  # Et à la liste d'origine
                         Pile.append((len(ListeFrontiere) - 1, profondeur + 1))  # Ajouter l'index de l'état avec sa profondeur sur le dessus de la pile pour exploration ultérieure
                         parents.append(Index)  # L'état courant (index) est le parent de ce nouvel état
