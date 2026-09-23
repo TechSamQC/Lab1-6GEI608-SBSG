@@ -3,7 +3,7 @@ import numpy as np
 
 from Algo_Largeur import AlgoLargeur
 from Algo_Profondeur import AlgoProfondeur
-from Algo_Approfondissement import AlgoApprofondissement
+from Algo_Approfondissement import AlgoApprofondissementIteratif
 
 count = 1 # Variable globale pour compter les occurrences
 Ex = 1 # Variable globale pour le numéro d'exemple
@@ -63,7 +63,8 @@ def main():
     count = 1  # Réinitialiser le compteur
     while (count <= 10):
         print ("Execution approfondissement itératif #", count)
-        # TODO: Ajouter ici l'implémentation de l'algorithme pour résoudre le jeu
+        # Appel de l'algorithme de recherche à approfondissement itératif
+        AlgoApprofondissementIteratif(matriceinitiale, matricevoulue, count, Ex)
         count += 1
     
     # Retour d'un code de sortie (0 = succès)
