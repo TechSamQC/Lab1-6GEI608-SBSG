@@ -42,6 +42,7 @@ Pour la recherche à approfondissement itératif, l'algorithme fait les opérati
 5. Pour retrouver le chemin de la solution, l'algorithme remonte les parents à partir de l'état final jusqu'à l'état initial.
 
 **PARTICULARITÉS :**
++ IMPORTANT : L'algorithme ne permettait pas de résoudre le cas 3, étant donné qu'il n'y avait pas de solution. L'algorithme était alors pris à l'infini. Dans un soucis de bon fonctionnement, nous avons décidé de **limiter la profondeur maximale à 40**. Cela permet de résoudre les cas de tests ayant une solution possible et d'avoir un "cutoff", comme montré dans le cours, si il n'y a pas de solution après 40 itérations.
 + L'algorithme combine les avantages de la recherche en profondeur et de la recherche en largeur.
 + Il explore les états de manière itérative en profondeur croissante, ce qui permet de trouver des solutions optimales tout en limitant l'utilisation de la mémoire.
 + Le défaut est que l'exécution est plus lente, étant donné qu'on doit recommencer la recherche à partir du début pour chaque augmentation de la profondeur maximale.
