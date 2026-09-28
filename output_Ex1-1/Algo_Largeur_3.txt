@@ -1,3 +1,0 @@
-Execution 3. 	 Taille de la frontière : 80321.
-Nombre d'états explorés : 61756.
-Temps d'exécution : 0.8298 secondes.
